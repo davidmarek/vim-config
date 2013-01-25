@@ -2,24 +2,24 @@
 " David Marek
 
 set nocompatible	" Nekompatibilni s vi
+
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 filetype plugin indent on
 
 syntax on
 set hlsearch
 
 set t_Co=256
-colorscheme wombat256mod
+colorscheme molokai
 
 if &t_Co > 2 && has("gui_running")
     syntax on
     set runtimepath+=,~/vim
     set guifont=DeJavu\ Sans\ Mono\ 9
-    "  set guifont=Monaco\ 8
-    "
-    let g:indent_guides_auto_colors = 0
-    autocmd VimEnter *  :IndentGuidesEnable
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#282828 ctermbg=3
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#242424 ctermbg=4
+    "set guifont=Consolas\ 10
 
 endif
 
@@ -59,13 +59,35 @@ set softtabstop=4
 set shiftround
 set nowrap
 set listchars=tab:\ \ ,trail:-
+set textwidth=0
+set colorcolumn=80
 
 map <S-Up> <Up>
 map <S-Down> <Down>
 
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=#1E0010
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+map <leader>td <Plug>TaskList
+map <leader>n :NERDTreeToggle<CR>
+
+highlight ColorColumn ctermbg=red guibg=#202020
+imap <C-BS> <C-W>
+
+
+" If the current buffer has never been saved, it will have no name,
+" call the file browser to save it, otherwise just save it.
+command -nargs=0 -bar Update if &modified 
+                           \|    if empty(bufname('%'))
+                           \|        browse confirm write
+                           \|    else
+                           \|        confirm write
+                           \|    endif
+                           \|endif
+nnoremap <silent> <C-S> :<C-u>Update<CR>
+inoremap <c-s> <Esc>:Update<CR>
+

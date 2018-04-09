@@ -1,13 +1,12 @@
 call plug#begin('~/.config/nvim/bundle')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'zchee/deoplete-jedi'
 Plug 'tomasr/molokai'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tpope/vim-fugitive'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -26,14 +25,18 @@ set expandtab
 set nobackup
 set noswapfile
 set nowrap
+set scrolloff=10
+set clipboard=unnamedplus
 
 " preferences
 inoremap jk <ESC>
-let mapleader = "\<Space>"
+let mapleader = "<Space>"
 set pastetoggle=<F2>
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+nnoremap z <c-r>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -43,10 +46,10 @@ vnoremap > >gv
 " same as yy).
 noremap Y y$
 " navigate split screens easily
-nmap <silent> wk :wincmd k<CR>
-nmap <silent> wj :wincmd j<CR>
-nmap <silent> wh :wincmd h<CR>
-nmap <silent> wl :wincmd l<CR>
+nmap <silent> <Leader>wk :wincmd k<CR>
+nmap <silent> <Leader>wj :wincmd j<CR>
+nmap <silent> <Leader>wh :wincmd h<CR>
+nmap <silent> <Leader>wl :wincmd l<CR>
 " change spacing for language specific
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -54,8 +57,8 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 syntax enable
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-set background=dark
-colorscheme molokai 
+set background=light
+colorscheme PaperColor
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?

@@ -30,6 +30,7 @@ set clipboard=unnamedplus
 
 " preferences
 inoremap jk <ESC>
+vnoremap jk <ESC>
 let mapleader = "<Space>"
 set pastetoggle=<F2>
 " j/k will move virtual lines (lines that wrap)
